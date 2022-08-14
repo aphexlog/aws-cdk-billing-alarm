@@ -29,6 +29,9 @@ export interface BillingAlarmProps {
  * once the stack is deployed.
  */
 export class BillingAlarm extends Construct {
+  // public snsTopic: sns.ITopic
+  public get snsTopic(): sns.ITopic { return this.snsTopic; }
+
   constructor(scope: Construct, id: string, props: BillingAlarmProps) {
     super(scope, id);
 
@@ -75,6 +78,9 @@ export class BillingAlarm extends Construct {
     );
 
     const alarmAction: cwa.SnsAction = new cwa.SnsAction(billingAlarmTopic);
+
+    // const snsTopic = billingAlarm.node.findChild('Topic') as sns.ITopic;
+    // const snsTopic = billingAlarm.node.findChild('Topic') as sns.ITopic;
 
     billingAlarm.addAlarmAction(alarmAction);
   }
